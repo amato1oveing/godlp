@@ -191,6 +191,12 @@ func (I *Detector) doDetectKV(kvItem *KVItem, results *[]*dlpheader.DetectResult
 					break
 				}
 			}
+			for _, r := range I.VReg {
+				if r.Match([]byte(kvItem.Value)) {
+					hit = true
+					break
+				}
+			}
 		}
 		if hit { // key rule is hited
 			if len(I.VDict) == 0 && len(I.VReg) == 0 { // no value rule
